@@ -36,18 +36,18 @@ function App() {
     const onSubmit = async (event: FormEvent) => {
         event.preventDefault()
         let formData = new FormData()
-        console.group("File Size")
-        console.log(`Before ${formState.file?.size}`)
+        console.group("File Submit/Download")
+        console.log(`Before size: ${formState.file?.size}`)
         formData.append('ext', formState.ext ?? '')
         if (formState.file) {
             formData.append('image', formState.file, formState.file.name)
         }
-        console.log(formState)
-        await fetch(`http://localhost:8000/convert`, {
+        await fetch(`/convert`, {
             method: 'post',
             body: formData,
         }).then(res => res.blob().then(data => {
-                console.log(`After: ${data.size}`)
+            if (res.status === 200) {
+                console.log(`After size: ${data.size}`)
                 const url = window.URL.createObjectURL(data);
                 const a = document.createElement('a');
                 a.style.display = 'none';
@@ -58,8 +58,18 @@ function App() {
                 a.click();
                 document.body.removeChild(a);
                 window.URL.revokeObjectURL(url);
+            } else if (res.status === 400) {
+                setFormState(p=>({
+                    ...p,
+                    ext: 'Invalid File Extension'
+                }))
+            } else {
+                console.error(res)
             }
-        ))
+            }
+        )).catch(err => {
+            console.error(err)
+        })
         console.groupEnd()
     }
 
@@ -73,7 +83,9 @@ function App() {
                 <div className='form-control'><label htmlFor={'ext'}>Extension: </label><input onChange={onChange}
                                                                                                type="ext" name="ext"
                                                                                                id="ext"/></div>
-                <input type="submit" value="Upload"/>
+                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                    {formState.ext.length > 5 && <small style={{color: 'firebrick'}}>'Invalid File Extension'</small>}
+                    <input type="submit" value="Upload" disabled={formState.ext.length > 5}/></div>
             </form>
         </div>
     );
