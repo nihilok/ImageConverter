@@ -1,8 +1,11 @@
 # Python/React Image Converter
 
-Install the requirements and run the server.
+Clone the repository; optionally create a virtual environment; install the requirements and run the server.
 ```sh
-pip install -r requirements
+git clone https://github.com/nihilok/ImageConverter.git
+cd ImageConverter
+python3 -m venv venv
+pip install -r requirements.txt
 python3 main.py
 ```
 Go to `http://localhost:8000` in a browser. (Or `http://<LOCAL_IP>:8000` from another device)
