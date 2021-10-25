@@ -46,26 +46,29 @@ function App() {
             method: 'post',
             body: formData,
         }).then(res => res.blob().then(data => {
-            if (res.status === 200) {
-                console.log(`After size: ${data.size}`)
-                const url = window.URL.createObjectURL(data);
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = url;
-                // the filename you want
-                a.download = (formState.file?.name ?? 'image') + '.' + formState.ext;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(url);
-            } else if (res.status === 400) {
-                setFormState(p=>({
-                    ...p,
-                    ext: 'Invalid File Extension'
-                }))
-            } else {
-                console.error(res)
-            }
+                if (res.status === 200) {
+                    console.log(`After size: ${data.size}`)
+                    const url = window.URL.createObjectURL(data);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    let fileName = formState.file?.name ?? 'image.image'
+                    let fileNameArr = fileName.split('.').slice(0, fileName.split('.').length - 1)
+                    fileNameArr.push(formState.ext)
+                    fileName = fileNameArr.join('.')
+                    a.download = fileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                } else if (res.status === 400) {
+                    setFormState(p => ({
+                        ...p,
+                        ext: 'Invalid File Extension'
+                    }))
+                } else {
+                    console.error(res)
+                }
             }
         )).catch(err => {
             console.error(err)
@@ -85,7 +88,7 @@ function App() {
                                                                                                id="ext"/></div>
                 <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                     {formState.ext.length > 5 && <small style={{color: 'firebrick'}}>'Invalid File Extension'</small>}
-                    <input type="submit" value="Upload" disabled={formState.ext.length > 5}/></div>
+                    <input type="submit" value="Convert" disabled={formState.ext.length > 5}/></div>
             </form>
         </div>
     );
