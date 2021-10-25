@@ -1,9 +1,9 @@
 import io
-
+import uvicorn
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.responses import StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from PIL import Image
-from starlette.staticfiles import StaticFiles
 
 app = FastAPI()
 
@@ -27,3 +27,6 @@ async def convert_image(ext: str = Form(...), image: UploadFile = File(...)):
 app.mount(
     "/", StaticFiles(directory="./img-converter-react/build", html=True), name="public"
 )
+
+if __name__ == "__main__":
+    uvicorn.run('main:app', host="0.0.0.0", port=8000, reload=True)
