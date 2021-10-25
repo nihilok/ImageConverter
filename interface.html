@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Image Converter</title>
+</head>
+<body>
+<h1>Image Converter</h1>
+<form action="/convert" method="post">
+    <div><label>Image to convert: <input name="image" type="file"/></label></div>
+    <div>Convert to: <label><input type="radio" name="ext" value="WEBP"/>.WEBP</label><label><input type="radio" name="ext" value="PNG"/>.PNG</label></div>
+    <div><input type="submit" value="Convert"/></div>
+</form>
+</body>
+</html>

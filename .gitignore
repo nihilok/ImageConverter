@@ -1,0 +1,26 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/img-converter-react/node_modules
+/img-converter-react/.pnp
+/img-converter-react/.pnp.js
+
+# testing
+/img-converter-react/coverage
+
+# production
+/img-converter-react/build
+
+# misc
+/img-converter-react/.DS_Store
+/img-converter-react/.env.local
+/img-converter-react/.env.development.local
+/img-converter-react/.env.test.local
+/img-converter-react/.env.production.local
+
+/img-converter-react/npm-debug.log*
+/img-converter-react/yarn-debug.log*
+/img-converter-react/yarn-error.log*
+
+/.idea/
+/__pycache__/
