@@ -9,7 +9,7 @@
 /img-converter-react/coverage
 
 # production
-/img-converter-react/build
+# /img-converter-react/build
 
 # misc
 /img-converter-react/.DS_Store
