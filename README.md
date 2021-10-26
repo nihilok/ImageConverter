@@ -5,6 +5,7 @@ Clone the repository; optionally create a virtual environment; install the requi
 git clone https://github.com/nihilok/ImageConverter.git
 cd ImageConverter
 python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 python main.py
 ```
