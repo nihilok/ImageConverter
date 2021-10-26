@@ -6,6 +6,6 @@ git clone https://github.com/nihilok/ImageConverter.git
 cd ImageConverter
 python3 -m venv venv
 pip install -r requirements.txt
-python3 main.py
+python main.py
 ```
 Go to `http://localhost:8000` in a browser. (Or `http://<LOCAL_IP>:8000` from another device)
